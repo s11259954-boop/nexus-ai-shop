@@ -4,18 +4,23 @@ Calculates item-item content similarity using TF-IDF representations.
 """
 
 import os
+import sys
 import pickle
 import pandas as pd
 import numpy as np
 from typing import List, Dict, Any, Optional
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROCESSED_PRODUCTS_PATH = os.path.join(BASE_DIR, "data", "processed", "clean_products.csv")
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
+
+from src.preprocessing import ensure_dataset_exists, PROCESSED_PRODUCTS_PATH
 MODELS_DIR = os.path.join(BASE_DIR, "models")
 
 
 class ContentRecommender:
     def __init__(self):
+        ensure_dataset_exists()
         self.df_products = pd.read_csv(PROCESSED_PRODUCTS_PATH)
         self.indices = pd.Series(self.df_products.index, index=self.df_products["product_id"]).drop_duplicates()
 

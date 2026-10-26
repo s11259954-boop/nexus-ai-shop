@@ -19,6 +19,8 @@ if BASE_DIR not in sys.path:
 from src.hybrid_recommender import HybridRecommender
 from src.content_recommender import ContentRecommender
 from src.ranking import SmartRankingEngine
+from src.preprocessing import ensure_dataset_exists
+
 PROCESSED_PRODUCTS_PATH = os.path.join(BASE_DIR, "data", "processed", "clean_products.csv")
 RAW_INTERACTIONS_PATH = os.path.join(BASE_DIR, "data", "raw", "interactions.csv")
 RAW_USERS_PATH = os.path.join(BASE_DIR, "data", "raw", "users.csv")
@@ -26,6 +28,7 @@ RAW_USERS_PATH = os.path.join(BASE_DIR, "data", "raw", "users.csv")
 
 class RecommenderEvaluator:
     def __init__(self, k: int = 5):
+        ensure_dataset_exists()
         self.k = k
         self.df_products = pd.read_csv(PROCESSED_PRODUCTS_PATH)
         self.all_pids = set(self.df_products["product_id"])

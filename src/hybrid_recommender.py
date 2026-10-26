@@ -15,6 +15,7 @@ if BASE_DIR not in sys.path:
 
 from src.content_recommender import ContentRecommender
 from src.collaborative_recommender import CollaborativeRecommender
+from src.preprocessing import ensure_dataset_exists
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROCESSED_PRODUCTS_PATH = os.path.join(BASE_DIR, "data", "processed", "clean_products.csv")
@@ -24,6 +25,7 @@ RAW_USERS_PATH = os.path.join(BASE_DIR, "data", "raw", "users.csv")
 
 class HybridRecommender:
     def __init__(self, content_weight: float = 0.5, collab_weight: float = 0.5):
+        ensure_dataset_exists()
         self.content_weight = content_weight
         self.collab_weight = collab_weight
 

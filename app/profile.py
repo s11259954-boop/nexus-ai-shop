@@ -58,6 +58,7 @@ def render_profile_page(
     tab_history, tab_wishlist, tab_fingerprint = st.tabs(["🕘 Browsing & Interaction History", "❤️ Saved Wishlist", "🧬 AI Behavioral Fingerprint"])
 
     # Load DB session to query user records
+    from sqlalchemy import text
     from database.database import SessionLocal, Interaction, Wishlist as WishlistModel
     db = SessionLocal()
     try:
@@ -132,14 +133,14 @@ def render_profile_page(
 
             with col_f2:
                 # Distribution of interactions by category for active user
-                query = f"""
-                SELECT p.category, COUNT(i.interaction_id) as count
-                FROM interactions i
-                JOIN products p ON i.product_id = p.product_id
-                WHERE i.user_id = '{active_user["user_id"]}'
-                GROUP BY p.category
-                """
-                df_user_cats = pd.read_sql(query, db.bind)
+                cat_query = text("""
+                    SELECT p.category, COUNT(i.interaction_id) as count
+                    FROM interactions i
+                    JOIN products p ON i.product_id = p.product_id
+                    WHERE i.user_id = :uid
+                    GROUP BY p.category
+                """)
+                df_user_cats = pd.read_sql(cat_query, db.bind, params={"uid": active_user["user_id"]})
                 if not df_user_cats.empty:
                     import plotly.express as px
                     fig = px.pie(df_user_cats, values="count", names="category", title="User Category Affinity Weight")

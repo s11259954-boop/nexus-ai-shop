@@ -10,6 +10,7 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 from typing import Dict, Any
+from sqlalchemy import text
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if BASE_DIR not in sys.path:
@@ -88,7 +89,7 @@ class AnalyticsEngine:
             GROUP BY p.category
             ORDER BY purchases DESC
             """
-            df = pd.read_sql(query, db.bind)
+            df = pd.read_sql(text(query), db.bind)
             if df.empty:
                 return go.Figure()
 
@@ -131,7 +132,7 @@ class AnalyticsEngine:
             ORDER BY total_interactions DESC
             LIMIT 7
             """
-            df = pd.read_sql(query, db.bind)
+            df = pd.read_sql(text(query), db.bind)
             if df.empty:
                 return go.Figure()
 
@@ -152,7 +153,7 @@ class AnalyticsEngine:
         """Generates distribution histogram of ratings in the catalog."""
         db = SessionLocal()
         try:
-            df = pd.read_sql("SELECT rating FROM products", db.bind)
+            df = pd.read_sql(text("SELECT rating FROM products"), db.bind)
             fig = px.histogram(
                 df,
                 x="rating",

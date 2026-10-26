@@ -8,12 +8,12 @@ import os
 import random
 import pandas as pd
 import numpy as np
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timedelta
 import sys
 
 # Ensure root directory is on PYTHONPATH
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from database.database import init_db, SessionLocal, Product, User, Category, Interaction, Rating, Wishlist
+from database.database import init_db, SessionLocal, Product, User, Category, Interaction, Rating, Wishlist, utc_now_naive
 
 # Deterministic seed for reproducible evaluation and tests
 random.seed(42)
@@ -705,7 +705,7 @@ def generate_synthetic_interactions(num_additional_users: int = 40):
     all_prod_ids = [p["product_id"] for p in PRODUCTS_CATALOG]
 
     # Generate interactions for users (except cold-start user USER_COLD_006)
-    base_time = datetime.utcnow() - timedelta(days=30)
+    base_time = utc_now_naive() - timedelta(days=30)
 
     for user in users:
         u_id = user["user_id"]
@@ -804,7 +804,7 @@ def seed_database_and_export_csv():
 
     # 1. Export Raw CSVs for ML Pipeline & Notebooks
     df_products = pd.DataFrame(PRODUCTS_CATALOG)
-    df_products["created_at"] = datetime.utcnow()
+    df_products["created_at"] = utc_now_naive()
     df_products.to_csv(os.path.join(RAW_DATA_DIR, "products.csv"), index=False)
 
     df_interactions = pd.DataFrame(interactions_list)

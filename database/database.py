@@ -4,12 +4,16 @@ Supports SQLite (zero-config local) and MySQL (production).
 """
 
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
 from sqlalchemy import (
     create_engine, Column, Integer, String, Float, Text, DateTime, ForeignKey, Index
 )
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship, Session
+
+def utc_now_naive():
+    """Returns naive UTC datetime object avoiding Python 3.12+ utcnow deprecation."""
+    return datetime.now(timezone.utc).replace(tzinfo=None)
 
 # Environment variable or default SQLite database
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ecommerce.db")
@@ -52,7 +56,7 @@ class Product(Base):
     popularity_score = Column(Float, default=0.0)
     stock = Column(Integer, default=100)
     image_url = Column(Text, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=utc_now_naive)
 
     # Relationships
     interactions = relationship("Interaction", back_populates="product", cascade="all, delete-orphan")
@@ -66,7 +70,7 @@ class User(Base):
     username = Column(String(100), nullable=False)
     email = Column(String(150), unique=True, nullable=False)
     preferred_category = Column(String(100), nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=utc_now_naive)
 
     # Relationships
     interactions = relationship("Interaction", back_populates="user", cascade="all, delete-orphan")
@@ -81,7 +85,7 @@ class Interaction(Base):
     user_id = Column(String(50), ForeignKey("users.user_id"), nullable=False, index=True)
     product_id = Column(String(50), ForeignKey("products.product_id"), nullable=False, index=True)
     interaction_type = Column(String(20), nullable=False, index=True)  # view, click, like, wishlist, cart, purchase
-    timestamp = Column(DateTime, default=datetime.utcnow)
+    timestamp = Column(DateTime, default=utc_now_naive)
 
     user = relationship("User", back_populates="interactions")
     product = relationship("Product", back_populates="interactions")
@@ -95,7 +99,7 @@ class Rating(Base):
     product_id = Column(String(50), ForeignKey("products.product_id"), nullable=False, index=True)
     rating = Column(Float, nullable=False)
     review_text = Column(Text, nullable=True)
-    timestamp = Column(DateTime, default=datetime.utcnow)
+    timestamp = Column(DateTime, default=utc_now_naive)
 
     user = relationship("User", back_populates="ratings")
     product = relationship("Product", back_populates="ratings")
@@ -107,7 +111,7 @@ class Wishlist(Base):
     wishlist_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(String(50), ForeignKey("users.user_id"), nullable=False, index=True)
     product_id = Column(String(50), ForeignKey("products.product_id"), nullable=False, index=True)
-    added_at = Column(DateTime, default=datetime.utcnow)
+    added_at = Column(DateTime, default=utc_now_naive)
 
     user = relationship("User", back_populates="wishlist")
 
@@ -121,7 +125,7 @@ class RecommendationLog(Base):
     algorithm = Column(String(50), nullable=False)  # content, collaborative, hybrid, trending, similar, etc.
     score = Column(Float, nullable=False)
     explanation = Column(Text, nullable=True)
-    timestamp = Column(DateTime, default=datetime.utcnow)
+    timestamp = Column(DateTime, default=utc_now_naive)
 
 
 # ========================================================
@@ -148,7 +152,7 @@ def log_interaction(db: Session, user_id: str, product_id: str, interaction_type
         user_id=user_id,
         product_id=product_id,
         interaction_type=interaction_type,
-        timestamp=datetime.utcnow()
+        timestamp=utc_now_naive()
     )
     db.add(interaction)
 

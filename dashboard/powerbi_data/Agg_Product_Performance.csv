@@ -8,7 +8,7 @@ Books & Stationery,O'Reilly,PROD_BOOK_002,Designing Data-Intensive Applications 
 Books & Stationery,O'Reilly,PROD_BOOK_003,"Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow",2250.0,4.8,90.0,26,12,10,8,2,46.15,16.67
 Books & Stationery,Moleskine,PROD_BOOK_004,"Moleskine Classic Notebook (Hard Cover, Ruled/Lined, Black)",1795.0,4.6,83.0,24,13,11,6,5,54.17,38.46
 Electronics,Apple,PROD_ELEC_001,Apple iPhone 15 (128 GB) - Black,69999.0,4.6,95.5,7,5,3,2,2,71.43,40.0
-Electronics,Apple,PROD_ELEC_002,Apple iPhone 15 Plus (128 GB) - Blue,79999.0,4.7,88.1,2,0,1,0,0,0.0,0.0
+Electronics,Apple,PROD_ELEC_002,Apple iPhone 15 Plus (128 GB) - Blue,79999.0,4.7,88.3,4,0,1,0,0,0.0,0.0
 Electronics,Apple,PROD_ELEC_003,Apple iPhone 14 (128 GB) - Midnight,57999.0,4.5,91.2,12,7,8,2,1,58.33,14.29
 Electronics,Samsung,PROD_ELEC_004,"Samsung Galaxy S24 5G (Onyx Black, 256GB)",74999.0,4.6,89.4,9,6,2,2,1,66.67,16.67
 Electronics,Google,PROD_ELEC_005,"Google Pixel 8 (Hazel, 128GB)",63999.0,4.4,82.5,15,13,1,2,2,86.67,15.38

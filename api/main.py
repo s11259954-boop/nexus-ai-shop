@@ -17,11 +17,15 @@ if BASE_DIR not in sys.path:
     sys.path.append(BASE_DIR)
 
 from database.database import get_db, SessionLocal, Product, User, Interaction, Wishlist, Rating, log_interaction
+from src.preprocessing import ensure_dataset_exists
 from src.hybrid_recommender import HybridRecommender
 from src.content_recommender import ContentRecommender
 from src.collaborative_recommender import CollaborativeRecommender
 from src.ranking import SmartRankingEngine
 from src.evaluation import RecommenderEvaluator
+
+# Guarantee dataset and models exist
+ensure_dataset_exists()
 
 app = FastAPI(
     title="AI-Powered Personalized Product Recommendation & Analytics API",
@@ -51,9 +55,9 @@ evaluator = RecommenderEvaluator(k=5)
 # ========================================================
 
 class InteractionCreate(BaseModel):
-    user_id: str = Field(..., example="USER_TECH_001")
-    product_id: str = Field(..., example="PROD_ELEC_001")
-    interaction_type: str = Field(..., example="view", description="view, click, like, wishlist, cart, purchase")
+    user_id: str = Field(..., json_schema_extra={"example": "USER_TECH_001"})
+    product_id: str = Field(..., json_schema_extra={"example": "PROD_ELEC_001"})
+    interaction_type: str = Field(..., json_schema_extra={"example": "view"}, description="view, click, like, wishlist, cart, purchase")
 
 
 class WishlistToggle(BaseModel):

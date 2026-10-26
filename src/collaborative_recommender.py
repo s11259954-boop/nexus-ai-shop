@@ -5,6 +5,7 @@ as well as Frequently Bought Together associations.
 """
 
 import os
+import sys
 import pickle
 import pandas as pd
 import numpy as np
@@ -13,16 +14,22 @@ from sklearn.metrics.pairwise import cosine_similarity
 from typing import List, Dict, Any, Optional
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROCESSED_PRODUCTS_PATH = os.path.join(BASE_DIR, "data", "processed", "clean_products.csv")
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
+
+from src.preprocessing import ensure_dataset_exists, PROCESSED_PRODUCTS_PATH
 RAW_INTERACTIONS_PATH = os.path.join(BASE_DIR, "data", "raw", "interactions.csv")
 MODELS_DIR = os.path.join(BASE_DIR, "models")
 
 
 class CollaborativeRecommender:
     def __init__(self, n_components: int = 10):
+        ensure_dataset_exists()
         self.df_products = pd.read_csv(PROCESSED_PRODUCTS_PATH)
         self.products_dict = self.df_products.set_index("product_id").to_dict("index")
         self.n_components = n_components
+        self.predicted_matrix = pd.DataFrame()
+        self.item_sim_matrix = pd.DataFrame()
 
         # Load matrices
         uim_path = os.path.join(MODELS_DIR, "user_item_matrix.pkl")
@@ -46,6 +53,7 @@ class CollaborativeRecommender:
         if self.user_item_matrix.empty or len(self.user_item_matrix.columns) == 0:
             self.svd = None
             self.predicted_matrix = pd.DataFrame()
+            self.item_sim_matrix = pd.DataFrame()
             return
 
         # SVD components cannot exceed min(n_samples, n_features) - 1
@@ -74,7 +82,7 @@ class CollaborativeRecommender:
 
     def get_collaborative_recommendations(self, user_id: str, top_n: int = 5) -> List[Dict[str, Any]]:
         """Generates collaborative filtering recommendations for a specific user."""
-        if user_id not in self.predicted_matrix.index:
+        if self.predicted_matrix.empty or user_id not in self.predicted_matrix.index:
             # User not in matrix (Cold start)
             return []
 

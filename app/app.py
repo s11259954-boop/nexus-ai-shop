@@ -71,6 +71,8 @@ st.markdown("""
 @st.cache_resource
 def load_ml_engines():
     """Initializes and caches recommendation models."""
+    from src.preprocessing import ensure_dataset_exists
+    ensure_dataset_exists()
     hybrid = HybridRecommender()
     content = ContentRecommender()
     collab = CollaborativeRecommender()
@@ -85,6 +87,12 @@ def load_catalog_and_users():
     try:
         products = db.query(Product).all()
         users = db.query(User).all()
+
+        if not products or not users:
+            from data.seed_data import seed_database_and_export_csv
+            seed_database_and_export_csv()
+            products = db.query(Product).all()
+            users = db.query(User).all()
 
         prod_dicts = [
             {

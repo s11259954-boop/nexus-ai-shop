@@ -15,6 +15,41 @@ from src.collaborative_recommender import CollaborativeRecommender
 from src.hybrid_recommender import HybridRecommender
 from src.ranking import SmartRankingEngine
 from src.evaluation import RecommenderEvaluator
+from src.preprocessing import (
+    ensure_dataset_exists,
+    RAW_PRODUCTS_PATH,
+    RAW_INTERACTIONS_PATH,
+    RAW_USERS_PATH,
+    PROCESSED_PRODUCTS_PATH
+)
+
+
+def test_dataset_files_exist_and_valid():
+    """Verify all raw and processed dataset files exist and contain records."""
+    path = ensure_dataset_exists()
+    assert os.path.exists(path)
+    assert os.path.exists(RAW_PRODUCTS_PATH)
+    assert os.path.exists(RAW_INTERACTIONS_PATH)
+    assert os.path.exists(RAW_USERS_PATH)
+    assert os.path.exists(PROCESSED_PRODUCTS_PATH)
+
+
+def test_missing_and_invalid_product_safety():
+    """Verify safe fallback when requesting unknown or non-existent product IDs."""
+    recommender = ContentRecommender()
+    res = recommender.get_similar_products("NON_EXISTENT_SKU_999", top_n=5)
+    assert res == []
+
+    alts = recommender.get_smart_alternatives("NON_EXISTENT_SKU_999", top_n=3)
+    assert alts == []
+
+
+def test_missing_user_cold_start_safety():
+    """Verify safe fallback when requesting unknown user ID (treat as cold start without crash)."""
+    hybrid = HybridRecommender()
+    recs = hybrid.get_personalized_recommendations("UNKNOWN_GUEST_USER_999", top_n=4)
+    assert len(recs) == 4
+    assert recs[0]["product_id"] is not None
 
 
 def test_content_recommender():

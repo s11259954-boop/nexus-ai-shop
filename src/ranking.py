@@ -5,12 +5,16 @@ and applies Maximal Marginal Relevance (MMR) for diversity.
 """
 
 import os
+import sys
 import pandas as pd
 import numpy as np
 from typing import List, Dict, Any, Optional
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROCESSED_PRODUCTS_PATH = os.path.join(BASE_DIR, "data", "processed", "clean_products.csv")
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
+
+from src.preprocessing import ensure_dataset_exists, PROCESSED_PRODUCTS_PATH
 
 
 class SmartRankingEngine:
@@ -22,6 +26,7 @@ class SmartRankingEngine:
         weight_popularity: float = 0.10,
         weight_recency: float = 0.05
     ):
+        ensure_dataset_exists()
         self.w_sim = weight_similarity
         self.w_pref = weight_user_pref
         self.w_rating = weight_rating
