@@ -1,0 +1,43 @@
+category,brand,product_id,product_name,price,rating,popularity_score,views_count,clicks_count,wishlist_count,cart_count,purchase_count,ctr_pct,conversion_rate_pct
+Beauty & Personal Care,Cetaphil,PROD_BEAUTY_001,Cetaphil Gentle Skin Cleanser (500ml),1150.0,4.7,92.0,13,7,4,4,3,53.85,42.86
+Beauty & Personal Care,The Ordinary,PROD_BEAUTY_002,The Ordinary Niacinamide 10% + Zinc 1% Serum (30ml),600.0,4.6,93.4,20,13,9,5,4,65.0,30.77
+Beauty & Personal Care,L'Oreal,PROD_BEAUTY_003,L'Oreal Paris Revitalift 1.5% Hyaluronic Acid Serum,999.0,4.4,85.0,28,20,11,7,5,71.43,25.0
+Beauty & Personal Care,Philips,PROD_BEAUTY_004,Philips AquaTouch S1323/45 Wet & Dry Cordless Shaver,2495.0,4.3,81.0,18,8,8,4,3,44.44,37.5
+Books & Stationery,Penguin,PROD_BOOK_001,Atomic Habits by James Clear (Hardcover),699.0,4.9,97.2,24,17,7,8,5,70.83,29.41
+Books & Stationery,O'Reilly,PROD_BOOK_002,Designing Data-Intensive Applications by Martin Kleppmann,1850.0,4.9,92.1,23,16,6,7,3,69.57,18.75
+Books & Stationery,O'Reilly,PROD_BOOK_003,"Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow",2250.0,4.8,90.0,26,12,10,8,2,46.15,16.67
+Books & Stationery,Moleskine,PROD_BOOK_004,"Moleskine Classic Notebook (Hard Cover, Ruled/Lined, Black)",1795.0,4.6,83.0,24,13,11,6,5,54.17,38.46
+Electronics,Apple,PROD_ELEC_001,Apple iPhone 15 (128 GB) - Black,69999.0,4.6,95.5,7,5,3,2,2,71.43,40.0
+Electronics,Apple,PROD_ELEC_002,Apple iPhone 15 Plus (128 GB) - Blue,79999.0,4.7,88.1,2,0,1,0,0,0.0,0.0
+Electronics,Apple,PROD_ELEC_003,Apple iPhone 14 (128 GB) - Midnight,57999.0,4.5,91.2,12,7,8,2,1,58.33,14.29
+Electronics,Samsung,PROD_ELEC_004,"Samsung Galaxy S24 5G (Onyx Black, 256GB)",74999.0,4.6,89.4,9,6,2,2,1,66.67,16.67
+Electronics,Google,PROD_ELEC_005,"Google Pixel 8 (Hazel, 128GB)",63999.0,4.4,82.5,15,13,1,2,2,86.67,15.38
+Electronics,OnePlus,PROD_ELEC_006,"OnePlus 12 (Silky Black, 256GB)",64999.0,4.5,84.1,9,8,3,3,0,88.89,0.0
+Electronics,Xiaomi,PROD_ELEC_007,"Xiaomi Redmi Note 13 Pro+ 5G (Fusion Purple, 256GB)",31999.0,4.3,79.0,7,6,2,2,1,85.71,16.67
+Electronics,Apple,PROD_ELEC_008,"Apple MacBook Air 15-inch M3 (16GB RAM, 512GB SSD)",134900.0,4.8,93.8,9,5,4,1,1,55.56,20.0
+Electronics,Dell,PROD_ELEC_009,"Dell XPS 13 OLED (Intel Core Ultra 7, 16GB, 1TB SSD)",142990.0,4.5,81.3,9,6,2,3,1,66.67,16.67
+Electronics,HP,PROD_ELEC_010,"HP Pavilion 15 (AMD Ryzen 7, 16GB RAM, 512GB SSD)",62990.0,4.3,77.4,13,9,3,0,0,69.23,0.0
+Electronics,Lenovo,PROD_ELEC_011,"Lenovo IdeaPad Slim 3 (Intel Core i5, 16GB, 512GB)",49990.0,4.2,75.0,7,5,2,2,2,71.43,40.0
+Electronics,Sony,PROD_ELEC_012,Sony WH-1000XM5 Wireless Noise Cancelling Headphones,29990.0,4.7,92.5,5,3,3,1,1,60.0,33.33
+Electronics,Apple,PROD_ELEC_013,Apple AirPods Pro (2nd Generation) with USB-C MagSafe,24900.0,4.8,94.0,12,7,4,3,2,58.33,28.57
+Electronics,boAt,PROD_ELEC_014,boAt Rockerz 450 Bluetooth Wireless On-Ear Headphones,1499.0,4.1,85.0,7,6,2,3,2,85.71,33.33
+Electronics,Logitech,PROD_ELEC_015,Logitech MX Master 3S Wireless Performance Mouse,8995.0,4.7,87.2,4,2,3,2,1,50.0,50.0
+Electronics,Keychron,PROD_ELEC_016,Keychron K2 Wireless Mechanical Keyboard (RGB Backlit),7999.0,4.6,80.5,10,7,0,2,1,70.0,14.29
+Fashion,Nike,PROD_FASH_001,Nike Dri-FIT Men's Running T-Shirt,1895.0,4.5,86.4,13,11,5,1,1,84.62,9.09
+Fashion,Adidas,PROD_FASH_002,Adidas Originals Men's Trefoil Hoodie,4599.0,4.6,88.0,8,5,3,3,1,62.5,20.0
+Fashion,Levi's,PROD_FASH_003,Levi's Men's 511 Slim Fit Jeans,3299.0,4.4,83.5,12,7,4,2,1,58.33,14.29
+Fashion,Zara,PROD_FASH_004,Zara Oversized Textured Knit Sweater,3990.0,4.3,76.8,14,8,8,4,3,57.14,37.5
+Fashion,Puma,PROD_FASH_005,Puma Men's Training Track Pants,2299.0,4.2,79.2,9,7,3,4,3,77.78,42.86
+Fashion,Nike,PROD_FASH_006,Nike Air Jordan 1 Low Retro (White/University Blue),8995.0,4.8,94.5,11,10,3,2,2,90.91,20.0
+Fashion,Adidas,PROD_FASH_007,Adidas Ultraboost Light Running Shoes,14999.0,4.7,90.1,12,10,2,2,1,83.33,10.0
+Fashion,Puma,PROD_FASH_008,Puma Smash V2 Leather Casual Sneakers,2799.0,4.3,84.8,13,10,8,2,1,76.92,10.0
+Sports & Fitness,Apple,PROD_FIT_001,Apple Watch Series 9 GPS 45mm (Midnight Aluminum),44900.0,4.8,95.0,13,13,5,5,1,100.0,7.69
+Sports & Fitness,Garmin,PROD_FIT_002,Garmin Forerunner 265 GPS Running Smartwatch,46990.0,4.7,84.6,10,9,4,2,2,90.0,22.22
+Sports & Fitness,Fitbit,PROD_FIT_003,Fitbit Charge 6 Fitness & Health Tracker,14999.0,4.3,81.2,5,4,0,2,1,80.0,25.0
+Sports & Fitness,Decathlon,PROD_FIT_004,Decathlon Domyos 20kg Adjustable Cast Iron Dumbbell Set,4999.0,4.6,82.0,12,7,5,1,0,58.33,0.0
+Sports & Fitness,Boldfit,PROD_FIT_005,Boldfit Yoga Mat with Alignment Lines (6mm Non-Slip),1299.0,4.4,78.5,11,8,2,3,2,72.73,25.0
+Home & Kitchen,Instant Pot,PROD_HOME_001,Instant Pot Duo 7-in-1 Electric Pressure Cooker (6 Quart),9999.0,4.7,91.0,12,6,6,3,2,50.0,33.33
+Home & Kitchen,Philips,PROD_HOME_002,Philips Digital Air Fryer HD9252/90 (4.1 Litre),7999.0,4.6,89.3,12,9,3,5,3,75.0,33.33
+Home & Kitchen,Dyson,PROD_HOME_003,Dyson V12 Detect Slim Cordless Vacuum Cleaner,54900.0,4.7,86.2,11,7,5,1,1,63.64,14.29
+Home & Kitchen,Prestige,PROD_HOME_004,Prestige Iris Plus 750W Mixer Grinder with 4 Jars,3199.0,4.2,83.1,8,3,3,1,0,37.5,0.0
+Home & Kitchen,Nespresso,PROD_HOME_005,Nespresso Vertuo Pop Coffee Machine,14999.0,4.5,80.4,12,7,6,2,2,58.33,28.57
