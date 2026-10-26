@@ -137,6 +137,22 @@ def init_db():
     Base.metadata.create_all(bind=engine)
 
 
+def ensure_db_initialized():
+    """Initializes schema and seeds initial data if database is empty."""
+    init_db()
+    db = SessionLocal()
+    try:
+        count = db.query(Product).count()
+        if count == 0:
+            from data.seed_data import seed_database_and_export_csv
+            seed_database_and_export_csv()
+    except Exception:
+        from data.seed_data import seed_database_and_export_csv
+        seed_database_and_export_csv()
+    finally:
+        db.close()
+
+
 def get_db():
     """Context manager or dependency for DB sessions."""
     db = SessionLocal()

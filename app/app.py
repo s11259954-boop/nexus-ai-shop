@@ -101,6 +101,8 @@ def load_ml_engines():
 @st.cache_data(ttl=60)
 def load_catalog_and_users():
     """Loads product catalog and registered users from SQLite/MySQL."""
+    from database.database import ensure_db_initialized
+    ensure_db_initialized()
     db = SessionLocal()
     try:
         products = db.query(Product).all()

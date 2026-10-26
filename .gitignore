@@ -48,3 +48,22 @@ ENV/
 
 # Temporary files
 *.log
+
+# Streamlit secrets & credentials
+.streamlit/secrets.toml
+.streamlit/credentials.toml
+
+# Environment variables & secrets
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.cert
+*.crt
+id_rsa
+id_rsa.pub
+
+# Test and agent caches
+.pytest_cache/
+.agents/
