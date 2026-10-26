@@ -4,9 +4,15 @@ Provides interactive controls to adjust ranking weights in real-time,
 compare Content-Based vs Collaborative vs Hybrid, and view factor breakdowns.
 """
 
+import os
+import sys
 import streamlit as st
 import pandas as pd
 from typing import Callable, Dict, Any
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
 
 
 def render_recommendations_lab(

@@ -9,10 +9,21 @@ import requests
 import streamlit as st
 import pandas as pd
 
-# Add workspace root to PYTHONPATH
+# Add workspace root to PYTHONPATH and ensure 'app' resolves to package, not app.py
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+
+while APP_DIR in sys.path:
+    sys.path.remove(APP_DIR)
+
 if BASE_DIR not in sys.path:
-    sys.path.append(BASE_DIR)
+    sys.path.insert(0, BASE_DIR)
+else:
+    sys.path.remove(BASE_DIR)
+    sys.path.insert(0, BASE_DIR)
+
+if "app" in sys.modules and getattr(sys.modules["app"], "__file__", "").endswith("app.py"):
+    del sys.modules["app"]
 
 from database.database import SessionLocal, Product, User, log_interaction
 from src.hybrid_recommender import HybridRecommender
@@ -20,11 +31,18 @@ from src.content_recommender import ContentRecommender
 from src.collaborative_recommender import CollaborativeRecommender
 from src.ranking import SmartRankingEngine
 
-from app.home import render_home_page
-from app.products import render_catalog_and_details_page
-from app.profile import render_profile_page
-from app.recommendations import render_recommendations_lab
-from app.admin import render_admin_dashboard
+try:
+    from app.home import render_home_page
+    from app.products import render_catalog_and_details_page
+    from app.profile import render_profile_page
+    from app.recommendations import render_recommendations_lab
+    from app.admin import render_admin_dashboard
+except (ImportError, ModuleNotFoundError):
+    from home import render_home_page
+    from products import render_catalog_and_details_page
+    from profile import render_profile_page
+    from recommendations import render_recommendations_lab
+    from admin import render_admin_dashboard
 
 # Streamlit Page Configuration
 st.set_page_config(

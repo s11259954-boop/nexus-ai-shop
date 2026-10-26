@@ -4,8 +4,14 @@ Features Hero banner, Category shortcuts, Trending products carousel,
 Personalized "Recommended For You" grid, and New Arrivals.
 """
 
+import os
+import sys
 import streamlit as st
 from typing import Callable, Dict, Any
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
 
 
 def render_home_page(

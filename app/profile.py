@@ -4,9 +4,15 @@ Allows testing different user personas (Tech, Fashion, Cold-Start new user),
 viewing browsing history, managing wishlist, and inspecting preference vectors.
 """
 
+import os
+import sys
 import streamlit as st
 import pandas as pd
 from typing import Callable, Dict, Any, List
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
 
 
 def render_profile_page(

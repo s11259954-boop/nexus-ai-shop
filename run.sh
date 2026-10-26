@@ -13,6 +13,9 @@ elif [ -d "venv" ]; then
     source venv/bin/activate
 fi
 
+# Ensure workspace root is in PYTHONPATH
+export PYTHONPATH=".:$PYTHONPATH"
+
 MODE="${1:-app}"
 
 case "$MODE" in

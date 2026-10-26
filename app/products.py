@@ -5,9 +5,15 @@ and detailed Product View with Explainable AI badges, Similar items,
 Frequently Bought Together, and Smart Alternatives.
 """
 
+import os
+import sys
 import streamlit as st
 import pandas as pd
 from typing import Callable, Dict, Any, Optional
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
 
 
 def render_catalog_and_details_page(

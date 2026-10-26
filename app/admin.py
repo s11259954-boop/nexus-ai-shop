@@ -4,8 +4,15 @@ Features executive KPIs, conversion funnels, category breakdown charts,
 recommender quality radar charts, and A/B Testing live results.
 """
 
+import os
+import sys
 import streamlit as st
 import pandas as pd
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
+
 from dashboard.analytics import AnalyticsEngine
 from src.evaluation import RecommenderEvaluator
 
