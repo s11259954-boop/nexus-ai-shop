@@ -254,15 +254,24 @@ def main():
 
         # Check FastAPI status
         st.markdown("---")
+        api_base = os.getenv("API_URL", "")
+        if not api_base and hasattr(st, "secrets") and "API_URL" in st.secrets:
+            api_base = str(st.secrets["API_URL"])
+        api_base = (api_base or "http://localhost:8000").rstrip("/")
+
         try:
-            res = requests.get("http://localhost:8000/", timeout=0.8)
+            res = requests.get(f"{api_base}/", timeout=1.5)
             if res.status_code == 200:
                 st.markdown("🟢 **FastAPI Backend:** `Online`")
+                st.caption(f"[Open API Docs]({api_base}/docs)")
             else:
                 st.markdown("🟡 **FastAPI Backend:** `Responding`")
         except Exception:
             st.markdown("⚪ **FastAPI Backend:** `Offline (Direct Mode)`")
-            st.caption("Start with: `uvicorn api.main:app --reload`")
+            if api_base != "http://localhost:8000":
+                st.caption(f"Target: `{api_base}`")
+            else:
+                st.caption("Start with: `uvicorn api.main:app --reload`")
 
     # ========================================================
     # Main Page Router

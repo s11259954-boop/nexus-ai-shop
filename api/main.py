@@ -34,9 +34,24 @@ app = FastAPI(
 )
 
 # Enable CORS for local Streamlit frontend and external web clients
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "*")
+if allowed_origins_env == "*":
+    origins = ["*"]
+else:
+    origins = [o.strip() for o in allowed_origins_env.split(",") if o.strip()]
+
+# Ensure deployed Streamlit frontend and local dev environments are supported
+default_frontends = [
+    "https://nexus-ai-shop-gzxikkvxucpjxt5uohqrmq.streamlit.app",
+    "http://localhost:8501"
+]
+for fe in default_frontends:
+    if fe not in origins and "*" not in origins:
+        origins.append(fe)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
